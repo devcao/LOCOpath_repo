@@ -38,6 +38,7 @@ Use ```lars``` as backend
 ```R
 # simulating power for n = 100, p = 1000, rho = 0 (independent case)
 # and testing beta_1 = 0
+
 require(LOCOpath)
 n = 100; p = 1000; rho = 0; iter = 500; B = 500;
 beta=c(0,rep(1,9),rep(0,p-10);
@@ -51,6 +52,7 @@ Use ```glmnet``` as backend
 ```R
 # simulating power for n = 100, p = 1000, rho = 0 (independent case)
 # and testing beta_1 = 0
+
 require(LOCOpath)
 source('NetTS.R')
 source('NetResampleTS.R')
@@ -68,7 +70,7 @@ Net.Resample.Power(n = n, p = p, beta = beta, rho=rho, iter = iter, B = B, setti
 # and testing beta_1 = 1, beta_10 = 0 and beta_11 = 0 simultaneously
 
 require(LOCOpath)
-n = 100; p = 1000; rho = 0; iter = 500; B=500;
+n = 100; p = 1000; rho = 0; iter = 500; B = 500;
 beta = c(1,rep(1,9),rep(0,p-10))
 Path.Resample.Power(n = n, p = p, beta = beta, rho=rho, iter = iter, B = B, setting = 'dep',
                               which.covariate = list(c(1,10,11)), betaNull = list(c(1,0,0)), multiTest = TRUE, 
@@ -78,16 +80,104 @@ Path.Resample.Power(n = n, p = p, beta = beta, rho=rho, iter = iter, B = B, sett
                               norm = 'L2.squared', path.method ='lars', beta.init = 'adaptive')
 ```
 
+#### Testing more general hypothesis like D\beta = d
 
-### high-dimensional logistic/Poisson regression
+```R
+# simulating power for n = 100, p = 1000, rho = 0 (independent case)
+# and testing beta_1 = beta_2
+
+require(LOCOpath)
+source('NetTS.R')
+source('NetResampleTS.R')
+
+n = 100; p = 1000; rho = 0; iter = 500; B = 500;
+beta = c(1,rep(1,10),rep(0,p-11))
+
+Path.Resample.Equality.Power(n = n, p = p, beta = beta, rho=rho, iter = iter, B = B, setting = 'dep', 
+                             betaNull = 0, # this line specify we are testing beta_1 - beta_2 = 0, can be non-zero value here
+                             parallel = TRUE, 
+                             norm = 'L2.squared', path.method ='lars', beta.init = 'adaptive')
+```
+
+
+
+### high-dimensional Logistic/Poisson regression
 #### Testing beta_j = 0
 ```R
-Path.Resample.Power
+# simulating power for n = 100, p = 1000, rho = 0 (independent case)
+# and testing beta_1 = 0 and beta_10 = 0 and beta_11 = 0 simultaneously
+
+require(LOCOpath)
+source('NetTS.R')
+source('NetResampleTS.R')
+source('NetResampleLogisticTS.R')
+
+n = 100; p = 1000; rho = 0; iter = 500; B = 500;
+beta = c(0,rep(1,9),rep(0,p-10))
+
+# for Logistic regression
+Net.Resample.Logistic.Power(n = n, p = p, beta = beta, intercept = 0.5, rho = rho, iter = iter, B = B, setting = 'dep', 
+                            which.covariate = 1, betaNull = 0, multiTest = FALSE, 
+                            parallel = TRUE, norm = 'L2.squared', beta.init = 'adaptive')
+
+# for Poisson regression
+beta = c(0,rep(1,2),rep(0,p-3))
+Net.Resample.Poisson.Power(n = n, p = p, beta = beta, intercept = 2, rho=rho, iter = iter, B = B, setting = 'dep', 
+                           which.covariate = 1, betaNull = 0, multiTest = FALSE, 
+                           parallel = TRUE, norm = 'L2.squared', beta.init = 'adaptive')
+
 ```
-#### Testing beta_j = non_zero_value
+#### Simultaneous Testing beta_i = 0 and beta_j = 0 and beta_k = 0 
+```R
+# simulating power for n = 100, p = 1000, rho = 0 (independent case)
+# testing beta_1 = 0
+
+require(LOCOpath)
+source('NetTS.R')
+source('NetResampleTS.R')
+source('NetResampleLogisticTS.R')
+
+n = 100; p = 1000; rho = 0; iter = 500; B = 500;
+beta = c(0,rep(1,9),rep(0,p-10))
+
+# for Logistic regression 
+# testing beta_1 = 0, beta_11 = 0 and beta_12 = 0 simultaneously
+Net.Resample.Logistic.Power(n = n, p = p, beta = beta, rho=rho, intercept = 0.5, iter = iter, B = B, setting = 'dep',
+                              which.covariate = list(c(1,11,12)), betaNull = list(c(0,0,0)), multiTest = TRUE, 
+                              parallel = TRUE, norm = 'L2.squared', beta.init = 'adaptive')
+
+# for Poisson regression
+testing beta_1 = 0, beta_4 = 0 and beta_5 = 0 simultaneously
+beta = c(0,rep(1,2),rep(0,p-3))
+Net.Resample.Poisson.Power(n = n, p = p, beta = beta, rho=rho, intercept = 2, iter = iter, B = B, setting = 'dep',
+                              which.covariate = list(c(1,4,5)), betaNull = list(c(0,0,0)), multiTest = TRUE, 
+                              parallel = TRUE, norm = 'L2.squared', beta.init = 'adaptive')
+
+```
+
 
 #### Testing beta_j = non_zero_value
+```R
+# simulating power for n = 100, p = 80, rho = 0 (independent case) 
+# p = 1000 in this case will cost too much running time
+# and testing beta_1 = 1
 
+require(LOCOpath)
+source('NetTS.R')
+source('NetResampleTS.R')
+source('NetResampleLogisticTS.R')
+source('Logistic_Enet.R')
+
+n = 100; p = 80; rho = 0; iter = 500; B = 500;
+beta = c(1,rep(3,2),rep(0,p-3))
+
+# for Logistic regression
+Net.Resample.Logistic.Con.Power(n = n, p = p, beta = beta, rho=rho, iter = iter, B = B, 
+                                which.covariate = 1, betaNull = 1, 
+                                parallel = TRUE, norm = 'L1', beta.init = 'adaptive')
+
+
+```
 
 ### sparse graphical models
 ```R
