@@ -33,21 +33,61 @@ In the data generating part, we use rho to specify the correlation structure
 ```
 
 ### high-dimensional linear regression 
+#### Testing beta_j = 0 or non zero value
+Use ```lars``` as backend
 ```R
 # simulating power for n = 100, p = 1000, rho = 0 (independent case)
 # and testing beta_1 = 0
 require(LOCOpath)
-n = 100; p = 1000; rho = 0; iter = 500; B=500;
-Path.Resample.Power(n = n, p = p, beta=c(0,rep(1,9),rep(0,p-10)), rho=rho, iter = iter, B = B, setting = 'dep', 
-                    which.covariate = 1, betaNull = 0, multiTest = FALSE,  # this line enables testing testing beta_{which.covariate} = betaNull
+n = 100; p = 1000; rho = 0; iter = 500; B = 500;
+beta=c(0,rep(1,9),rep(0,p-10);
+Path.Resample.Power(n = n, p = p, beta = beta, rho = rho, iter = iter, B = B, setting = 'dep', 
+                    which.covariate = 1, betaNull = 0, multiTest = FALSE,  # this line enables testing beta_{which.covariate} = betaNull
                     norm = 'L2.squared', beta.init = 'adaptive',  # this line uses L2 norm and adaptive LASSO as initial estimator
                     parallel = TRUE)  # we set parallel = TRUE, this will enable parallel computing on Mac/Linux machine. May not work on Windows machine.
 ```
 
+Use ```glmnet``` as backend
+```R
+# simulating power for n = 100, p = 1000, rho = 0 (independent case)
+# and testing beta_1 = 0
+require(LOCOpath)
+source('NetTS.R')
+source('NetResampleTS.R')
+n = 100; p = 1000; rho = 0; iter = 500; B = 500; beta=c(0,rep(1,9),rep(0,p-10);
+Net.Resample.Power(n = n, p = p, beta = beta, rho=rho, iter = iter, B = B, setting = 'dep', 
+                    which.covariate = 1, betaNull = 0, multiTest = FALSE,  # this line enables testing beta_{which.covariate} = betaNull
+                    norm = 'L2.squared', beta.init = 'adaptive',  # this line uses L2 norm and adaptive LASSO as initial estimator
+                    parallel = TRUE)  # we set parallel = TRUE, this will enable parallel computing on Mac/Linux machine. May not work on Windows machine.
+```
+
+#### Simultaneous Testing beta_i = 0 and beta_j = 0 and beta_k = 0 or non zero value
+
+```R
+# simulating power for n = 100, p = 1000, rho = 0 (independent case)
+# and testing beta_1 = 1, beta_10 = 0 and beta_11 = 0 simultaneously
+
+require(LOCOpath)
+n = 100; p = 1000; rho = 0; iter = 500; B=500;
+beta = c(1,rep(1,9),rep(0,p-10))
+Path.Resample.Power(n = n, p = p, beta = beta, rho=rho, iter = iter, B = B, setting = 'dep',
+                              which.covariate = list(c(1,10,11)), betaNull = list(c(1,0,0)), multiTest = TRUE, 
+                              # The code above enables testing beta_1 = 1, beta_10 = 0 and beta_11 = 0 simultaneously
+                              # multiTest must be set TRUE, which.covariate and betaNull need to have a list of vector as input
+                              parallel = TRUE,
+                              norm = 'L2.squared', path.method ='lars', beta.init = 'adaptive')
+```
+
+
 ### high-dimensional logistic/Poisson regression
+#### Testing beta_j = 0
 ```R
 Path.Resample.Power
 ```
+#### Testing beta_j = non_zero_value
+
+#### Testing beta_j = non_zero_value
+
 
 ### sparse graphical models
 ```R
