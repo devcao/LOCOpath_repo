@@ -40,9 +40,8 @@ require(LOCOpath)
 n = 100; p = 1000; rho = 0; iter = 500; B=500;
 Path.Resample.Power(n = n, p = p, beta=c(0,rep(1,9),rep(0,p-10)), rho=rho, iter = iter, B = B, setting = 'dep', 
                     which.covariate = 1, betaNull = 0, multiTest = FALSE,  # this line enables testing testing beta_{which.covariate} = betaNull
-                    parallel = TRUE, norm = 'L2.squared', beta.init = 'adaptive')  # this line uses L2 norm and adaptive LASSO as initial estimator
-
-# we set parallel = TRUE, this will enable parallel computing on Mac/Linux machine. May not work on Windows machine.
+                    norm = 'L2.squared', beta.init = 'adaptive',  # this line uses L2 norm and adaptive LASSO as initial estimator
+                    parallel = TRUE)  # we set parallel = TRUE, this will enable parallel computing on Mac/Linux machine. May not work on Windows machine.
 ```
 
 ### high-dimensional logistic/Poisson regression
