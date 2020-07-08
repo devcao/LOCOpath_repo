@@ -9,7 +9,7 @@ To install, please first install R package ```devtools``` and then
 devtools::install_github("devcao/LOCOpath")
 ```
 
-## Road map for each file.
+## Road map for the core R code.
 
 [NetTS.R](./NetTS.R):  LOCO path statistic calculations for linear/logistic/Poisson regression, backend R package ```glmnet```.
 
@@ -23,8 +23,8 @@ devtools::install_github("devcao/LOCOpath")
 
 [compare_power.R](./compare_power.R): All the power simulation codes for other method we need to compare, including desparsified LASSO, T/F/Wald test.
 
-## Power simulation functions road map and some examples
-In the data generating part, we use rho to specify the correlation structure
+## Power simulation functions and examples
+In the data generating part, we use **rho** to specify the correlation structure
 ```R
  #  rho: can be 'equl': compound symmetry with correlation = 0.8
  #              'weak_equl': compound symmetry with correlation = 0.5
