@@ -32,7 +32,7 @@ In the data generating part, we use rho to specify the correlation structure
  #               0: independent case
 ```
 
-### high-dimensional linear regression 
+### High-dimensional linear regression 
 #### Testing beta_j = 0 or non zero value
 Use ```lars``` as backend
 ```R
@@ -101,7 +101,7 @@ Path.Resample.Equality.Power(n = n, p = p, beta = beta, rho=rho, iter = iter, B 
 
 
 
-### high-dimensional Logistic/Poisson regression
+### High-dimensional Logistic/Poisson regression
 #### Testing beta_j = 0
 ```R
 # simulating power for n = 100, p = 1000, rho = 0 (independent case)
@@ -179,10 +179,41 @@ Net.Resample.Logistic.Con.Power(n = n, p = p, beta = beta, rho=rho, iter = iter,
 
 ```
 
-### sparse graphical models
+### sparse Gaussian graphical models
+#### An example 
 ```R
-Path.Resample.Power
+require(glasso)
+require(CVglasso)
+require(LOCOpath)
+source('graphLASSO.R')
+source('NetTS.R')
+
+### generate precision matrix
+p=20; Theta = diag(rep(1.0,p)); index = 10
+for ( i in 1:(p-index)){
+  Theta[i, i+index ] = 0.5
+  Theta[i+index, i] = Theta[i, i+index ] 
+}
+### generate data based on precision matrix
+Mu=rep(0,p); X=rmvn(n=100, mu = Mu,sigma = Sigma); S=var(X)
+
+### cross validated glasso
+a = CVglasso(X=X, S=S)
+### our LOCO path statistic
+TS_sigma = graph_TS(S = S, n_rho = 50)
+
+### compare the results
+par(mfrow=c(1,3))
+# we remove the diagonal values
+diag(Theta)=0; image_v1(Theta,main='Truth', xaxt='n',yaxt='n',)
+diag(a$Omega)=0; image_v1(abs(a$Omega), main = 'glasso', xaxt='n',yaxt='n',)
+
+TS_sd = TS_sigma/sum(TS_sigma, na.rm=TRUE) # normalize
+diag(TS_sd) = 0; image_v1(TS_sd, main = 'LOCO path', xaxt='n',yaxt='n')
+
 ```
+![Results](./graph_example.pdf)
+
 
 ## Real data analysis
 
