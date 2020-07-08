@@ -24,20 +24,25 @@ devtools::install_github("devcao/LOCOpath")
 [compare_power.R](./compare_power.R): All the power simulation codes for other method we need to compare, including desparsified LASSO, T/F/Wald test.
 
 ## Power simulation functions road map and some examples
+In the data generating part, we use rho to specify the correlation structure
+```R
+ #  rho: can be 'equl': compound symmetry with correlation = 0.8
+ #              'weak_equl': compound symmetry with correlation = 0.5
+ #               positive value:  toeplitz matrix with correlation = rho, the specified value
+ #               0: independent case
+```
+
 ### high-dimensional linear regression 
 ```R
-Path.Resample.Power(n = 100, p = 1000, beta=c(rep(1,10),rep(0,990)), rho=0.5, iter = 500, B = 500, setting = 'dep', which.covariate = 1, betaNull = 1, multiTest = FALSE, ...)
-# Simulate power of the LOCO path statistic for linear regression, based on lars
-# Args:
-# rho: related to dependent design setting
-#	n,p,beta : sample size, number of features, regression oefficients
-# iter : int, # of iterations 
-# B: int, # of bootstrap replications
-# setting: use 'dep',  currently didn't add other options
-# which.covariate, betaNull, multiTest: same argument in function Net.Resample, check Net.Resample for more details
-# Returns:
-#	A matrix of len(which.covariate) * 4 : Simulated power for j-th covariate
-#  
+# simulating power for n = 100, p = 1000, rho = 0 (independent case)
+# and testing beta_1 = 0
+require(LOCOpath)
+n = 100; p = 1000; rho = 0; iter = 500; B=500;
+Path.Resample.Power(n = n, p = p, beta=c(0,rep(1,9),rep(0,p-10)), rho=rho, iter = iter, B = B, setting = 'dep', 
+                    which.covariate = 1, betaNull = 0, multiTest = FALSE,  # this line enables testing testing beta_{which.covariate} = betaNull
+                    parallel = TRUE, norm = 'L2.squared', beta.init = 'adaptive')  # this line uses L2 norm and adaptive LASSO as initial estimator
+
+# we set parallel = TRUE, this will enable parallel computing on Mac/Linux machine. May not work on Windows machine.
 ```
 
 ### high-dimensional logistic/Poisson regression
