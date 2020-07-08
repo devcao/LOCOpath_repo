@@ -2,6 +2,7 @@
 
 require(CVglasso)
 require(huge)
+source('graphLASSO.R')
 
 # This package contains the riboflavin dataset
 require(hdi)
