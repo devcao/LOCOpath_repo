@@ -41,7 +41,7 @@ Path.Resample.Power
 
 ## Real data analysis
 
-## Some code to run on Slurm cluster
+## Some code to run on [Slurm](https://slurm.schedmd.com/overview.html) managed cluster
 
 
 
