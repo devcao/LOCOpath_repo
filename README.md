@@ -1,6 +1,6 @@
 # LOCOpath project code repo
 This github repo contains all project code for the LOCO path high dimensional inference.
-Apart from the code listed here, you may also need to install the R package ```LOCOpath```.
+Apart from the code listed here, you may also need to install the R package [```LOCOpath```](https://github.com/devcao/LOCOpath).
 
 ## Install the R package
 
