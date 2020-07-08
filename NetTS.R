@@ -332,9 +332,9 @@ ExactNet.TS.Logistic.Con <- function(X, Y, which.covariate, betaNull = 0,
   #
   # Args:
   # X,Y: design matrix (matrix) and response vector (vecotr or matrix of 1 column)
-  # which.covariate: if is a vector, indicating which covariate we will be computing; if is a list: then do simultanoues testing.
+  # which.covariate: if is a vector, indicating which covariate we will be computing; 
   #                   E.g, which.covariate = 1, we test for beta_1
-  #                   E.g, which.covariate = list(c(1,2)), we test simultaneously for beta_1=.. and beta_2= ..
+  #               
   # betaNULL: same size and same data type with which.covariate, specify the null hypothesis H0: beta = betaNULL. 
   #                   E.g, if which.covariate = 1, we test for beta_1
   #                         then specify betaNull=0 or any other value  
