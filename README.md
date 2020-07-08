@@ -179,7 +179,7 @@ Net.Resample.Logistic.Con.Power(n = n, p = p, beta = beta, rho=rho, iter = iter,
 
 ```
 
-### sparse Gaussian graphical models
+### Sparse Gaussian graphical models
 #### An example 
 ```R
 require(glasso)
@@ -215,8 +215,14 @@ diag(TS_sd) = 0; image_v1(TS_sd, main = 'LOCO path', xaxt='n',yaxt='n')
 ![Results](./graph_example.png)
 
 
-
 ## Real data analysis
+### 1st project
+Please check the [Reproduce the real data analysis section](https://github.com/devcao/LOCOpath/blob/master/Examples.md).
+### 2nd project
+Please check file [logistic_real_data.R](./logistic_real_data.R). 
+### 3rd project
+Please check file [glasso_real_data.R](./glasso_real_data.R). 
+
 
 ## Some code to run on [Slurm](https://slurm.schedmd.com/overview.html) managed cluster
 
