@@ -24,9 +24,20 @@ devtools::install_github("devcao/LOCOpath")
 [compare_power.R](./compare_power.R): All the power simulation codes for other method we need to compare, including desparsified LASSO, T/F/Wald test.
 
 ## Power simulation functions road map and some examples
-### high-dimensional linear regression
+### high-dimensional linear regression 
 ```R
-Path.Resample.Power
+Path.Resample.Power(n = 100, p = 1000, beta=c(rep(1,10),rep(0,990)), rho=0.5, iter = 500, B = 500, setting = 'dep', which.covariate = 1, betaNull = 1, multiTest = FALSE, ...)
+# Simulate power of the LOCO path statistic for linear regression, based on lars
+# Args:
+# rho: related to dependent design setting
+#	n,p,beta : sample size, number of features, regression oefficients
+# iter : int, # of iterations 
+# B: int, # of bootstrap replications
+# setting: use 'dep',  currently didn't add other options
+# which.covariate, betaNull, multiTest: same argument in function Net.Resample, check Net.Resample for more details
+# Returns:
+#	A matrix of len(which.covariate) * 4 : Simulated power for j-th covariate
+#  
 ```
 
 ### high-dimensional logistic/Poisson regression
