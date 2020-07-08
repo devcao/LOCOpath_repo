@@ -212,7 +212,7 @@ TS_sd = TS_sigma/sum(TS_sigma, na.rm=TRUE) # normalize
 diag(TS_sd) = 0; image_v1(TS_sd, main = 'LOCO path', xaxt='n',yaxt='n')
 
 ```
-![Results](./graph_example.pdf)
+![Results](./graph_example.png)
 
 
 
