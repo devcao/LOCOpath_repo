@@ -354,7 +354,12 @@ new_net_power_plot = function(path_1, path_2, file_name, beta_sp = 0.1, cex_labe
   
   dev.off()
 }
-
+#####################################################
+    
+##############################
+### some examples
+##############################    
+    
 new_net_power_plot(
   path_1 = 'poi_poi_3signal_new_pc_net_hdi_simu_1000_dep',
   file_name = 'poi_neww_1000',
