@@ -1,40 +1,5 @@
 
-"
-\begin{table}[htbp]
-\centering
-\begin{tabular}{llllll}
-\hline
-\hline
-Design & Method & $\alpha=0.20$ & $\alpha=0.10$ & $\alpha=0.05$& $\alpha=0.01$\\
-\hline
-\hline
-$\Sigma = \mathbf{I}_p$ & $T_1(1,1)$ & 0.208 & 0.130 & 0.070 & 0.018 \\
-& $T_1(2,2)$ & 0.242 & 0.124 & 0.066&  0.018 \\
-& $T_1(\infty,\infty)$ & 0.268 & 0.126 & 0.068 & 0.024  \\
-\hline
-$\Sigma = (0.5^{|i-j|})_{1\leq i , j \leq p}$&  $T_1(1,1)$ & 0.230 & 0.128 & 0.078 & 0.018 \\
-& $T_1(2,2)$ & 0.184 & 0.100 & 0.056 & 0.018 \\
-& $T_1(\infty,\infty)$ & 0.186 & 0.100 & 0.050 & 0.014  \\
-\hline
-$\Sigma = (0.9^{|i-j|})_{1\leq i , j \leq p}$ & $T_1(1,1)$ & 0.210 & 0.134 & 0.076 & 0.020  \\
-& $T_1(2,2)$ & 0.230 & 0.146 & 0.090 & 0.024 \\
-& $T_1(\infty,\infty)$ & 0.212 & 0.102 & 0.046 & 0.000  \\
-\hline
-$\Sigma = (0.5^{\mathbf{1}(i \neq j)})_{1\leq i , j \leq p}$ & $T_1(1,1)$ & 0.184 & 0.102 & 0.058 &  0.012  \\
-& $T_1(2,2)$ & 0.206 & 0.084 & 0.044 & 0.008 \\
-& $T_1(\infty,\infty)$ & 0.176 & 0.096 & 0.058 & 0.016  \\
-\hline
-$\Sigma = (0.8^{\mathbf{1}(i \neq j)})_{1\leq i , j \leq p}$ & $T_1(1,1)$ & 0.214 & 0.142 & 0.098 & 0.042 \\
-& $T_1(2,2)$ & 0.188 & 0.086 & 0.046 & 0.016 \\
-& $T_1(\infty,\infty)$ & 0.148 & 0.054 & 0.026 & 0.004   \\
-\hline
-\hline
-\end{tabular}
-\caption{Multiple testing empirical size under different $\Sigma$ with $n=100$, $p=1000$.}
-\label{tab:m_size_all_1000}
-\end{table}
-"
-
+##### don't change these ########
 first_str = "\\begin{table}[htbp]
 \\centering
 \\begin{tabular}{llllll}
@@ -51,13 +16,15 @@ last_str = "\\hline
 \\label{tab:m_size_all_1000}
 \\end{table}
 "
+########
 
-
+## generate size table automatically
 auto_size_table = function(path_1, path_2, caption_name, label_name, path_2_change=FALSE,
                            rho, beta_sp = 0.1, recalculate = FALSE, comp_method=NULL
   
+                           
 ){
-  
+
   
   if(beta_sp == 0.5){
     beta = seq(0,5,0.5)
