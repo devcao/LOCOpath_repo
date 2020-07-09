@@ -16,15 +16,24 @@ last_str = "\\hline
 \\label{tab:m_size_all_1000}
 \\end{table}
 "
-########
+##### don't change these ########
 
-## generate size table automatically
+## generate size table latex code automatically
 auto_size_table = function(path_1, path_2, caption_name, label_name, path_2_change=FALSE,
                            rho, beta_sp = 0.1, recalculate = FALSE, comp_method=NULL
   
                            
 ){
-
+ # Args:
+  # path_1: the main part of the name of your output R data
+  # path_2: can be ignored. If specified, path_2 is the method you want to compare the power.
+  # caption_name: caption of the latex code table
+  # label_name: label of the latex code table
+  # rho: ignore, put anything it will work
+  # beta_sp: the space of the beta sequence
+  # recalculate: if true, will recalculate the power and omit NA
+  # comp_method: the name of the method you want to campare
+  # Return: latex code of the size table
   
   if(beta_sp == 0.5){
     beta = seq(0,5,0.5)
@@ -216,8 +225,13 @@ auto_size_table = function(path_1, path_2, caption_name, label_name, path_2_chan
    
 }
 
+#######################################################
 
 
+
+############################
+### some examples ##########
+############################
 
 auto_size_table(
   path_1 = 'log_new_new_pc_net_hdi_simu_80_dep',
