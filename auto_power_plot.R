@@ -1,11 +1,22 @@
 
 require(latex2exp)
 
-
+## generate power curve automatically
 new_net_power_plot = function(path_1, path_2, file_name, beta_sp = 0.1, cex_label=1.4, 
                               recalculate = FALSE, comp_method=NULL,
                               path_2_alter = FALSE, beta_imp, poi_80=FALSE){
-  
+  # Args:
+  # path_1: the main part of the name of your output R data
+  # path_2: can be ignored. If specified, path_2 is the method you want to compare the power.
+  # file_name: name of the output pdf
+  # beta_sp: the space of the beta sequence
+  # cex_label: cex of the legend
+  # recalculate: if true, will recalculate the power and omit NA
+  # comp_method: the name of the method you want to campare
+  # path_2_alter: if true, extract data from path_2 as ..$power, otherwise extract the whole data
+  # beta_imp: i forgot, use default please
+  # poi_80: fix some small issue for poisson regression, you can ignore
+  # Return: NULL, will output a pdf power curve to your current directory
   if(beta_sp == 0.5){
     beta = seq(0,5,0.5)
     xlim_r = 5
