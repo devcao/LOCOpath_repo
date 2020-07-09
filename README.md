@@ -225,7 +225,7 @@ Please check file [glasso_real_data.R](./glasso_real_data.R).
 
 
 ## Some code to run on [Slurm](https://slurm.schedmd.com/overview.html) managed cluster
-
+The cluster code are in [slurm_cluster_code][./slurm_cluster_code]. To run the power simulation on a slurm managed cluster, check this out. (Not very organized yet)
 
 
 
