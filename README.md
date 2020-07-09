@@ -226,6 +226,9 @@ Please check file [glasso_real_data.R](./glasso_real_data.R).
 
 ## Some code to run on [Slurm](https://slurm.schedmd.com/overview.html) managed cluster
 The cluster code are in directory ```slurm_cluster_code```. To run the power simulation on a slurm managed cluster, check this out. (Not very organized yet)
+[auto_power_plot.R](./auto_power_plot.R): automatic generate power curve using just 1 line of code
+[auto_size_table.R](./auto_size_table.R): automatic size using just 1 line of code
+These 2 files are based on the simulation output from the cluster running jobs.
 
 
 
