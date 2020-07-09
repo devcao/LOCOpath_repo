@@ -178,6 +178,36 @@ Net.Resample.Logistic.Con.Power(n = n, p = p, beta = beta, rho=rho, iter = iter,
 
 
 ```
+#### Variable screening 
+```R
+source("screen_simu.R")
+require(mvnfast)
+require(LOCOpath)
+n = 20; p = 100; 
+
+# LOCO path variable screening 
+# logistic_screen_simu returns a list of value L1 and L2. L1: screen rate for L1 norm, L2: screen rate for L2 norm
+scrn_rslt = list()
+for (beta_1 in 1:5){
+
+  scrn_rslt$rho00 = logistic_screen_simu(n = n, p = p, signal = beta_1, rho = 0, iter = iter)
+  scrn_rslt$rho01 = logistic_screen_simu(n = n, p = p, signal = beta_1, rho = 0.1, iter = iter)
+  scrn_rslt$rho05 = logistic_screen_simu(n = n, p = p, signal = beta_1, rho = 0.5, iter = iter)
+  scrn_rslt$rho09 = logistic_screen_simu(n = n, p = p, signal = beta_1, rho = 0.9, iter = iter)
+}
+
+# SIS/Iterated SIS variable screening
+# logistic_sis_simu returns a list of value sis and isis. sis: screen rate for sis, isis: screen rate for isis
+scrn_rslt = list()
+for (beta_1 in 1:5){
+
+  scrn_rslt$rho00 = logistic_sis_simu(n = n, p = p, signal = beta_1, rho = 0, iter = iter)
+  scrn_rslt$rho01 = logistic_sis_simu(n = n, p = p, signal = beta_1, rho = 0.1, iter = iter)
+  scrn_rslt$rho05 = logistic_sis_simu(n = n, p = p, signal = beta_1, rho = 0.5, iter = iter)
+  scrn_rslt$rho09 = logistic_sis_simu(n = n, p = p, signal = beta_1, rho = 0.9, iter = iter)
+}
+```
+logistic_sis_simu(n = n, p = p, signal = beta_i, rho = rho, iter = iter)
 
 ### Sparse Gaussian graphical models
 #### Compare the results to glasso 
