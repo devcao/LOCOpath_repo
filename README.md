@@ -180,7 +180,7 @@ Net.Resample.Logistic.Con.Power(n = n, p = p, beta = beta, rho=rho, iter = iter,
 ```
 
 ### Sparse Gaussian graphical models
-#### An example 
+#### Compare the results to glasso 
 ```R
 require(glasso)
 require(CVglasso)
@@ -213,6 +213,18 @@ diag(TS_sd) = 0; image_v1(TS_sd, main = 'LOCO path', xaxt='n',yaxt='n')
 
 ```
 ![Results](./graph_example.png)
+
+#### Variable screening
+```R
+source('graphLASSO.R')
+
+# for n = 100, p = 50, matrix type = A
+n = 100
+p = 50
+results = simu_graph_screen(n = n, p = p, type = 'A', Iter = 250)
+save(results, file = 'type_A_n_100_p_50.RData')
+```
+To generate the ROC curve, check out [type_AC_n_100.R](./type_AC_n_100.R) and [type_AC_n_1000.R](./type_AC_n_1000.R) .
 
 
 ## Real data analysis
