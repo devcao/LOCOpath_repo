@@ -1,6 +1,8 @@
 # LOCOpath project code repo
-This github repo contains all project code for the LOCO path high dimensional inference.
+This github repo contains all project code for the LOCO(leave-one-covariate-out) path high dimensional inference.
 Apart from the code listed here, you may also need to install the R package [```LOCOpath```](https://github.com/devcao/LOCOpath).
+
+# What is LOCOpath project
 We provide a variable importance/statisical inference framework for **LASSO/group LASSO/fused LASSO/glmnet/graphical LASSO** regularied linear/generalized linear/gaussian graphical models in lower(p<n)/high dimensional settings(p>=n).  
 
 ## Install the R package
